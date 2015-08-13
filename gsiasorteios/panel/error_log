@@ -1,0 +1,12 @@
+[30-Jan-2014 01:03:08] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: NO) in /home/demon/public_html/admin/seguranca.php on line 40
+[30-Jan-2014 01:03:53] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: NO) in /home/demon/public_html/admin/seguranca.php on line 40
+[30-Jan-2014 09:32:26] PHP Warning:  require_once(../Connections/conn.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/demon/public_html/admin/header.php on line 1
+[30-Jan-2014 09:32:27] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required '../Connections/conn.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/demon/public_html/admin/header.php on line 1
+[30-Jan-2014 09:33:27] PHP Parse error:  syntax error, unexpected '/' in /home/demon/public_html/admin/header.php on line 5
+[30-Jan-2014 09:34:39] PHP Parse error:  syntax error, unexpected '/' in /home/demon/public_html/admin/header.php on line 5
+[30-Jan-2014 09:35:35] PHP Fatal error:  Cannot redeclare validausuario() (previously declared in /home/demon/public_html/admin/seguranca.php:59) in /home/demon/public_html/admin/seguranca.php on line 94
+[08-Feb-2014 22:25:07] PHP Parse error:  syntax error, unexpected $end in /home/rgcbot/public_html/panel/seguranca.php on line 172
+[08-Feb-2014 22:26:02] PHP Parse error:  syntax error, unexpected $end in /home/rgcbot/public_html/panel/seguranca.php on line 172
+[08-Feb-2014 22:26:49] PHP Parse error:  syntax error, unexpected $end in /home/rgcbot/public_html/panel/seguranca.php on line 172
+[08-Feb-2014 22:26:59] PHP Parse error:  syntax error, unexpected $end in /home/rgcbot/public_html/panel/seguranca.php on line 172
+[08-Feb-2014 22:41:34] PHP Parse error:  syntax error, unexpected '}' in /home/rgcbot/public_html/panel/seguranca.php on line 106

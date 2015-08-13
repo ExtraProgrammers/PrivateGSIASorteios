@@ -1,0 +1,176 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * item
+ */
+
+/* position headings */
+#yoo-zoo .item h3 {
+	margin-top: 0px;
+	font-size: 21px;
+	font-weight: normal;
+}
+
+/* element type: textarea */
+#yoo-zoo .item .element-textarea > * { margin: 0px 0px 10px 0px; }
+#yoo-zoo .item .element-textarea *:last-child { margin-bottom: 0px; }
+
+/* position: top */
+#yoo-zoo .item div.pos-top { overflow: hidden; }
+#yoo-zoo .item div.pos-top .element { margin-bottom: 15px; }
+
+/* position: title */
+#yoo-zoo .item h1.pos-title {
+	margin: 0px 0px 10px 0px;
+	border-bottom: 1px solid #c8c8c8;
+	font-size: 30px;
+	line-height: 40px;
+	color: #323232;
+	font-weight: normal;
+}
+
+/* position: content */
+#yoo-zoo .item div.pos-content {}
+#yoo-zoo .item div.pos-content .element { margin-bottom: 10px; }
+#yoo-zoo .item div.pos-content .element.last { margin-bottom: 0px; }
+
+/* element type: video */
+#yoo-zoo .item div.pos-content .element-video { text-align: center; }
+#yoo-zoo .item div.pos-content .element-video object { outline: none; }
+
+/* content typo */
+#yoo-zoo .item div.pos-content .element-textarea > * { overflow: hidden; }
+
+#yoo-zoo .item div.pos-content h2 {
+	margin: 15px 0px 0px 0px;
+	border-bottom: 1px solid #c8c8c8;
+	font-size: 25px;
+	font-weight: normal;
+	line-height: 35px;
+	letter-spacing: -1px;
+}
+
+#yoo-zoo .item div.pos-content h3 {
+	margin: 15px 0px 0px 0px;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 20px;
+	letter-spacing: 0px;
+}
+
+#yoo-zoo .item div.pos-content img { margin: 10px 0px 15px 0px; }
+
+#yoo-zoo .item div.pos-content img.float-left {
+	margin-right: 15px;
+	float: left;
+}
+
+#yoo-zoo .item div.pos-content img.float-right {
+	margin-left: 15px;
+	float: right;
+}
+
+#yoo-zoo .item div.pos-content ul { list-style: none; }
+
+#yoo-zoo .item div.pos-content ul li {
+	padding-left: 15px;
+	background: url(../images/bullet.png) 0px 50% no-repeat;
+}
+
+#yoo-zoo .item div.pos-content ol { padding-left: 45px; }
+#yoo-zoo .item div.pos-content ol.bold li { font-weight: bold; }
+#yoo-zoo .item div.pos-content ol.bold li div { font-weight: normal; }
+
+#yoo-zoo .item div.pos-content .border { border: 1px solid #c8c8c8; }
+
+/* position: related */
+#yoo-zoo .item div.pos-related { margin-top: 15px; }
+
+#yoo-zoo .item div.pos-related ul {
+	list-style: none;
+	margin: 0px 0px 0px 10px;
+	padding: 0px;
+}
+
+#yoo-zoo .item div.pos-related li {
+	padding-left: 15px;
+	background: url(../images/bullet.png) 0px 50% no-repeat;
+}
+
+/* position: meta, taxonomy */
+#yoo-zoo .item > div.meta {
+	margin-top: 20px;
+	padding: 10px;
+	border-top: 1px solid #c8c8c8;
+	border-bottom: 1px solid #c8c8c8;
+	background: #f5f5f5;
+	overflow: hidden;
+	font-size: 11px;
+	color: #464646;
+}
+
+#yoo-zoo .item > div.meta ul.pos-meta,
+#yoo-zoo .item > div.meta ul.pos-taxonomy {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#yoo-zoo .item > div.meta ul.pos-meta {
+	width: 180px;
+	float: left;
+}
+
+#yoo-zoo .item > div.meta ul.pos-taxonomy {
+	margin-left: 180px;
+	padding-left: 10px;
+	border-left: 1px solid #c8c8c8;
+}
+
+#yoo-zoo .item > div.meta strong { font-weight: normal; }
+
+/* position: bottom */
+#yoo-zoo .item div.pos-bottom { overflow: hidden;}
+#yoo-zoo .item div.pos-bottom .element {
+	margin-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #c8c8c8;
+}
+
+/* element type: socialbookmarks */
+#yoo-zoo .item div.socialbookmarks {
+	display: inline-block;
+	cursor: pointer;
+}
+
+
+/* Responsive
+----------------------------------------------------------------------------------------------------*/
+
+/* Only Phones */
+@media (max-width: 767px) {
+
+	#yoo-zoo .item > div.meta ul.pos-meta {
+		width: auto;
+		float: none;
+	}
+
+	#yoo-zoo .item > div.meta ul.pos-taxonomy {
+		margin-left: 0;
+		padding-left: 0;
+		border-left: none;
+	}
+
+}
+
+/* Only Phones (Portrait) */
+@media (max-width: 479px) {
+
+	/* Alignment */
+	#yoo-zoo .item div.pos-content img.float-left,
+	#yoo-zoo .item div.pos-content img.float-right {
+		margin: 10px auto;
+		float: none;
+	}
+
+}

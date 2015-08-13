@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_anuncio_global" value="name:id;datatype:int,name:anuncio_assunto;datatype:string" />
+	<infoitem key="UD_show_noticias" value="name:id;datatype:int,name:noticias_nome;datatype:string,name:noticias_assunto;datatype:string,name:noticias_username;datatype:string,name:noticias_data;datatype:date" />
+</info>

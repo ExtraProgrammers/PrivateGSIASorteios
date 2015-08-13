@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_usuarios" value="name:channel_name;datatype:string,name:log_name;datatype:string,name:url;datatype:string" />
+</info>

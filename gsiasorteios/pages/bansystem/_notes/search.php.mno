@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_view" value="name:id;datatype:int,name:stream_id;datatype:string,name:tag_clan1;datatype:string,name:tag_clan2;datatype:string,name:sentinel1;datatype:string,name:hero1;datatype:string,name:sentinel2;datatype:string,name:hero2;datatype:string,name:sentinel3;datatype:string,name:hero3;datatype:string,name:sentinel4;datatype:string,name:hero4;datatype:string,name:sentinel5;datatype:string,name:hero5;datatype:string,name:scourge1;datatype:string,name:hero6;datatype:string,name:scourge2;datatype:string,name:hero7;datatype:string,name:scourge3;datatype:string,name:hero8;datatype:string,name:scourge4;datatype:string,name:hero9;datatype:string,name:scourge5;datatype:string,name:hero10;datatype:string,name:streammer;datatype:string" />
+	<infoitem key="UD_count" value="name:id;datatype:int,name:username;datatype:string,name:channel;datatype:string" />
+</info>

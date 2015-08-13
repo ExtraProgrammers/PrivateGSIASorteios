@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_anuncio_global" value="name:id;datatype:int,name:anuncio_assunto;datatype:string" />
+</info>
