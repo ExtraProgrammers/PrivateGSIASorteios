@@ -17,6 +17,10 @@
   include ('Sorteios.php');
   include ('Participantes.php');
   include ('Ganhadores.php');
+  include ('Checkout.php');
+  include ('Vendas.php');
+  include ('Cadastros.php');
+  include ('ProdutosInfo.php');
 
   $querys = new Querys; // Inicia Classe Querys
 
@@ -30,6 +34,10 @@
   $participantes = new Participantes;
 
   $ganhadores = new Ganhadores;
+  
+  $produtos_info = new ProdutosInfo;
+  
+  $vendas = new Vendas;
   
   if ( (! isset($session->data['user']['user_login'])) and (! isset($session->data['user']['user_cpf'])) ) {
     $session->Destroy('user');

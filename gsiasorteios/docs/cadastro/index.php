@@ -1,6 +1,5 @@
 <?php 
   include '../../header.php';
-  include '../../classes/Cadastros.php'; 
 
   $querys = new Cadastros;
   $userdata = array();

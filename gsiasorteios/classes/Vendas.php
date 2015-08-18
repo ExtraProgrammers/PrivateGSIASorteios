@@ -1,34 +1,19 @@
 <?php
 
-  class Cadastros {
+  class Vendas {
 
-    private $tabela = 'gsia_accounts';
-    private $tabela_id = 'act_accounts_id';
-    private $tabela_data_cadastro = 'act_account_data_cadastro';
-    private $tabela_senha = 'act_account_senha';
-    private $tabela_cpf = 'act_account_cpf';
+    private $tabela = 'gsia_produtos_vendas';
+    private $tabela_id = 'vnd_vendas_id';
+    private $tabela_transaction_id = 'vnd_transaction_id';
+    private $tabela_data_cadastro = 'vnd_data_cadastro';
+    private $tabela_data_alteracao = 'vnd_data_alteracao';
     
-    private $tabela_credit = 'gsia_accounts_info';
-
     function addRegistro($data)
     {
       $querys = new Querys;
 
       // Data cadastro atual
       $data[$this->tabela_data_cadastro] = date('Y-m-d H:i:s');
-
-      // Transforma senha em MD5
-      $data[$this->tabela_senha] = $querys->escape(md5($data[$this->tabela_senha]));
-
-      // CPF sem ponto e traço
-      $valor = $data[$this->tabela_cpf];
-
-      $valor = str_replace(".", "", $valor);
-      $valor = str_replace(",", "", $valor);
-      $valor = str_replace("-", "", $valor);
-      $valor = str_replace("/", "", $valor);
-
-      $data[$this->tabela_cpf] = $valor;
 
       // Retorna todos os campos da tabela
       $result = $this->getCampos();
@@ -67,18 +52,8 @@
     {
       $querys = new Querys;
 
-      // Transforma senha em MD5
-      $data[$this->tabela_senha] = $querys->escape(md5($data[$this->tabela_senha]));
-
-      // CPF sem ponto e traço
-      $valor = $data[$this->tabela_cpf];
-
-      $valor = str_replace(".", "", $valor);
-      $valor = str_replace(",", "", $valor);
-      $valor = str_replace("-", "", $valor);
-      $valor = str_replace("/", "", $valor);
-
-      $data[$this->tabela_cpf] = $valor;
+      // Insere a data de ultima alteração
+      $data[$this->tabela_data_alteracao] = date('Y-m-d H:i:s');
 
       // Retorna todos os campos da tabela
       $result = $this->getCampos();
@@ -100,7 +75,7 @@
 
       $sql = substr(trim($sql), 0, -1);
 
-      $sql .= " WHERE " . $this->tabela_id . " = " . (int)$registro_id;
+      $sql .= " WHERE " . $this->tabela_transaction_id . " = '" . $registro_id . "'";
 
       $result = $querys->query($sql);
 
@@ -119,7 +94,9 @@
       $session = new Session;
       $session->StartSession();
       $user = new User;
-      $user->CheckLogin($session->data);
+      if (! $user->CheckLogin($session->data)) {
+        echo "<script>document.location.href='" . DIR_DOCS . "logout/'</script>";
+      }
       $querys = new Querys;
 
       $sql = "SELECT 
@@ -135,18 +112,16 @@
     }
 
     /**
-     * Metodo CheckCPFExists
+     * Metodo getRegistro
      *
      * @access public
-     * @param string $cpf
-     * @return boolean
+     * @param int $registro_id
+     * @return array
      */
-    public function CheckCPFExists($cpf) 
+    public function getRegistro($registro_id) 
     {
       $session = new Session;
       $session->StartSession();
-      $user = new User;
-      $user->CheckLogin($session->data);
       $querys = new Querys;
 
       $sql = "SELECT 
@@ -154,68 +129,128 @@
                 FROM  
                   " . $this->tabela . "
                 WHERE 
-                  act_account_cpf = '" . $cpf . "'";
+                  vnd_transaction_id = '" . $registro_id . "'";
       
       $query = $querys->query($sql);
 
-      if ($query->num_rows == 0) {
-        return false;
-      } else {
-        return true;
-      }
+      return $query->row;
     }
 
     /**
-     * Metodo GetCreditCount
+     * Metodo getAprovadas
      *
      * @access public
-     * @param string $act_accounts_id
-     * @return int
+     * @param int $act_accounts_id
+     * @return array
      */
-    public function GetCreditCount($act_accounts_id) 
+    public function getAprovadas($act_accounts_id) 
     {
       $session = new Session;
       $session->StartSession();
       $user = new User;
+      if (! $user->CheckLogin($session->data)) {
+        echo "<script>document.location.href='" . DIR_DOCS . "logout/'</script>";
+      }
       $querys = new Querys;
 
       $sql = "SELECT 
-                  *
+                  COUNT(*) as count
                 FROM  
-                  " . $this->tabela_credit . "
+                  " . $this->tabela . "
                 WHERE 
-                  act_accounts_id = '" . $act_accounts_id . "'";
+                  vnd_accounts_id = '" . $act_accounts_id . "' AND
+                  (vnd_status = '3' OR 
+                  vnd_status = '4')";
       
       $query = $querys->query($sql);
 
-      if ($query->num_rows == 0) {
-        return '0';
-      } else {
-        return $query->row['act_account_credit'];
-      }
+      return $query->row['count'];
     }
 
     /**
-     * Metodo CheckCreditExists
+     * Metodo getPendentes
      *
      * @access public
      * @param int $act_accounts_id
+     * @return array
+     */
+    public function getPendentes($act_accounts_id) 
+    {
+      $session = new Session;
+      $session->StartSession();
+      $user = new User;
+      if (! $user->CheckLogin($session->data)) {
+        echo "<script>document.location.href='" . DIR_DOCS . "logout/'</script>";
+      }
+      $querys = new Querys;
+
+      $sql = "SELECT 
+                  COUNT(*) as count
+                FROM  
+                  " . $this->tabela . "
+                WHERE 
+                  vnd_accounts_id = '" . $act_accounts_id . "' AND
+                  (vnd_status = '1' OR 
+                  vnd_status = '2' OR 
+                  vnd_status = '5' OR 
+                  vnd_status = '9')";
+      
+      $query = $querys->query($sql);
+
+      return $query->row['count'];
+    }
+
+    /**
+     * Metodo getCanceladas
+     *
+     * @access public
+     * @param int $act_accounts_id
+     * @return array
+     */
+    public function getCanceladas($act_accounts_id) 
+    {
+      $session = new Session;
+      $session->StartSession();
+      $user = new User;
+      if (! $user->CheckLogin($session->data)) {
+        echo "<script>document.location.href='" . DIR_DOCS . "logout/'</script>";
+      }
+      $querys = new Querys;
+
+      $sql = "SELECT 
+                  COUNT(*) as count
+                FROM  
+                  " . $this->tabela . "
+                WHERE 
+                  vnd_accounts_id = '" . $act_accounts_id . "' AND
+                  (vnd_status = '6' OR 
+                  vnd_status = '7' OR 
+                  vnd_status = '8')";
+      
+      $query = $querys->query($sql);
+
+      return $query->row['count'];
+    }
+
+    /**
+     * Metodo CheckCPFExists
+     *
+     * @access public
+     * @param string $cpf
      * @return boolean
      */
-    public function CheckCreditExists($act_accounts_id) 
+    public function CheckVendaExists($vnd_transaction_id) 
     {
       $session = new Session;
       $session->StartSession();
-      $user = new User;
-      $user->CheckLogin($session->data);
       $querys = new Querys;
 
       $sql = "SELECT 
                   *
                 FROM  
-                  " . $this->tabela_credit . "
+                  " . $this->tabela . "
                 WHERE 
-                  act_accounts_id = '" . $act_accounts_id . "'";
+                  vnd_transaction_id = '" . $vnd_transaction_id . "'";
       
       $query = $querys->query($sql);
 
@@ -227,50 +262,25 @@
     }
 
     /**
-     * Metodo AddCredit
+     * Metodo UpdateEntregue
      *
      * @access public
-     * @param int $act_accounts_id
-     * @param int $cnt_credit
+     * @param string $vnd_transaction_id
      * @return array
      */
-    public function AddCredit($act_accounts_id, $cnt_credit) 
+    public function UpdateEntregue($vnd_transaction_id) 
     {
       $session = new Session;
       $session->StartSession();
-      $querys = new Querys;
-
-      $sql = "INSERT INTO 
-                  " . $this->tabela_credit . " 
-                SET 
-                  act_account_credit = '" . (int)$cnt_credit . "',
-                  act_accounts_id = '" . (int)$act_accounts_id . "'";
-      
-      $query = $querys->query($sql);
-
-      return $query;
-    }
-
-    /**
-     * Metodo UpdateCredit
-     *
-     * @access public
-     * @param int $act_accounts_id
-     * @param int $cnt_credit
-     * @return array
-     */
-    public function UpdateCredit($act_accounts_id, $cnt_credit) 
-    {
-      $session = new Session;
-      $session->StartSession();
+      $user = new User;
       $querys = new Querys;
 
       $sql = "UPDATE 
-                  " . $this->tabela_credit . " 
+                  " . $this->tabela . " 
                 SET 
-                  act_account_credit = '" . (int)$cnt_credit . "'
+                  vnd_venda_entregue = '1'
                 WHERE 
-                  act_accounts_id = '" . (int)$act_accounts_id . "'";
+                  vnd_transaction_id = '" . $vnd_transaction_id . "'";
       
       $query = $querys->query($sql);
 

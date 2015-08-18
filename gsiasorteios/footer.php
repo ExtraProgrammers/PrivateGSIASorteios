@@ -17,7 +17,7 @@
 									</a>
 								</li>
 								<li class="level1 item110">
-									<a href="index.php/joomla.html" class="level1">
+									<a href="https://www.facebook.com/gsiasorteios" class="level1">
 										<span>Contato</span>
 									</a>
 								</li>

@@ -50,6 +50,26 @@
     var app = {
       base : 'http://localhost:8080/gsiasorteios/',
     };
+    
+    function float2moeda(num) {
+       x = 0;
+       if(num<0) {
+          num = Math.abs(num);
+          x = 1;
+       }
+       if(isNaN(num)) num = "0";
+          cents = Math.floor((num*100+0.5)%100);
+
+       num = Math.floor((num*100+0.5)/100).toString();
+
+       if(cents < 10) cents = "0" + cents;
+          for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+             num = num.substring(0,num.length-(4*i+3))+'.'
+                   +num.substring(num.length-(4*i+3));
+             ret = num + ',' + cents;
+              if (x == 1) ret = ' - ' + ret;return ret;
+
+    }
   </script>
   <style type="text/css">
     br { clear: both; }
@@ -79,7 +99,7 @@
       margin: 15px 0;
       padding: 10px;
     }
-    .box-warning {
+    .box-warning1 {
       background: #f2dede;
       border-color: #d6e9c6;
       border: 1px solid rgba(0,0,0,0.1);
@@ -126,7 +146,7 @@
                     </a>
                   </li>
                   <li class="level1 item110">
-                    <a href="http://rankedgaming.com" class="level1" target="_blank">
+                    <a href="https://www.facebook.com/gsiasorteios" class="level1" target="_blank">
                       Contato
                     </a>
                   </li>
@@ -147,7 +167,7 @@
         <div class="wrapper clearfix">
           <header id="header" class="grid-block">
             <a id="logo" href="<?php echo DIR_BASE; ?>">
-              <div class="custom-logo"><img src="<?php echo DIR_IMAGEN; ?>logo.png" width="310"></div>
+              <div class="custom-logo" style="width: 280px;"><img src="<?php echo DIR_IMAGEN; ?>logo.png" width="300"></div>
             </a>
             <nav id="menu">
               <ul class="menu menu-dropdown">
@@ -184,6 +204,16 @@
                 </li>
                 <!-- Código de SUB Menu End-->
 
+                <?php if (! empty($S_UserLogin)) { ?>
+                  <!-- Menu de Créditos START -->
+                  <li class="level1 item105">
+                    <a href="<?php echo DIR_DOCS; ?>loja/" class="level1">
+                      <span>Loja</span>
+                    </a>
+                  </li>
+                  <!-- Menu de Créditos END -->
+                <?php } ?>     
+
                 <li class="level1 item132 parent">
                   <a href="<?php echo DIR_DOCS; ?>sobre/" target="_blank" class="level1">
                     <span>Como Funciona</span>
@@ -191,7 +221,7 @@
                 </li>
 
                 <li class="level1 item105">
-                  <a href="pages/stream/index.php" class="level1">
+                  <a href="https://www.facebook.com/gsiasorteios" class="level1">
                     <span>Contato</span>
                   </a>
                 </li>
